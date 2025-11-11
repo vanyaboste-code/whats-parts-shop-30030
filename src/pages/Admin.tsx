@@ -48,9 +48,14 @@ const Admin = () => {
   }, []);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      navigate("/auth");
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/auth");
+      }
+    } catch (error) {
+      console.error("Auth check failed:", error);
+      toast.error("Authentication check failed");
     }
   };
 
@@ -64,7 +69,9 @@ const Admin = () => {
       if (error) throw error;
       setProducts(data || []);
     } catch (error) {
-      toast.error("Failed to load products");
+      toast.error("Failed to load products. Please check your connection.");
+      console.error(error);
+      setProducts([]);
     } finally {
       setLoading(false);
     }

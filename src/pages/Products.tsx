@@ -45,8 +45,9 @@ const Products = () => {
       if (error) throw error;
       setProducts(data || []);
     } catch (error) {
-      toast.error("Failed to load products");
+      toast.error("Failed to load products. Please check your connection.");
       console.error(error);
+      setProducts([]);
     } finally {
       setLoading(false);
     }
