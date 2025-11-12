@@ -1,3 +1,4 @@
+// Admin dashboard for managing products
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
